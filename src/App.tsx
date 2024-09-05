@@ -1,10 +1,13 @@
 import './App.css'
 import Fetch from './components/Fetch/Fetch'
+import { AuthProvider } from './hooks/useAuth'
 
 function App() {
 
   return (
-    <Fetch text="Hello World!" />
+    <AuthProvider>
+      <Fetch text="Hello World!" />
+    </AuthProvider>
   )
 }
 
