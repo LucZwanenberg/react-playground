@@ -1,17 +1,18 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { getUserFromApi } from './getUserFromApi';
 
-interface User {
+export interface User {
   type: "user";
   id: number;
   name: string;
   email: string;
 }
 
-interface Guest {
+export interface Guest {
   type: "guest";
 }
 
-type AuthState = {
+export type AuthState = {
   state: "fetching"
 } | {
   state: "done";
@@ -31,29 +32,16 @@ const AuthContext = createContext<AuthContextType>({
 
 interface AuthProviderProps {
   children: ReactNode;
+  getUser: () => Promise<User | Guest | null>;
 }
 
-const getUserFromApi = (): Promise<User | null> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({
-        type: "user",
-        id: 1,
-        name: 'John Doe',
-        email: 'john.doe@example.com',
-      });
-    }, 2000);
-  });
-};
-
-export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children, getUser }) => {
   const [auth, setAuth] = useState<AuthState>({ state: "fetching" });
 
   useEffect(() => {
     const fetchAuthenticatedUser = async () => {
-      const authUser = await getUserFromApi();
+      const authUser = await getUser();
 
-      console.log({ authUser });
       if (!authUser) return;
 
       setAuth({
