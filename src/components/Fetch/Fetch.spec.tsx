@@ -1,52 +1,73 @@
 import '@testing-library/jest-dom'
-import { render, fireEvent, screen } from '@testing-library/react'
-import Fetch from './Fetch'
+import { Provider } from "react-redux";
+import { render, fireEvent, screen, waitFor } from '@testing-library/react'
+import Fetch from './Fetch';
+import { store } from "../../redux/store";
+import { act } from 'react';
 
 
 describe("Fetch", () => {
   describe("initial state", () => {
     it("shows button", async () => {
       // arrange
-      render(<Fetch text="Hello world!" />);
+      render(<Provider store={store}>
+        <Fetch text="Hello world!" />
+      </Provider>);
 
       // assert
-      expect(screen.getByRole('button'))
-        .toHaveTextContent('Click me');
+      await waitFor(() => {
+        expect(screen.getByRole('button')).toHaveTextContent('Click me');
+      });
     });
 
     it("does not show text", async () => {
       // arrange
-      render(<Fetch text="Hello world!" />);
+      render(<Provider store={store}>
+        <Fetch text="Hello world!" />
+      </Provider>);
 
       // assert
-      expect(screen.getByRole('heading'))
-        .not.toHaveTextContent('Hello world!');
-    });
-  });
-
-  describe("when user clicks button", () => {
-    it("hides button", async () => {
-      // arrange
-      render(<Fetch text="Hello world!" />);
-
-      // act
-      fireEvent.click(screen.getByText('Click me'))
-
-      // assert
-      expect(screen.queryByRole('button'))
-        .toBeNull();
+      await waitFor(() => {
+        expect(screen.getByRole('heading'))
+          .not.toHaveTextContent('Hello world!');
+      });
     });
 
-    it("shows given text", async () => {
-      // arrange
-      render(<Fetch text="Hello world!" />);
+    describe("when user clicks button", () => {
+      it("hides button", async () => {
+        // arrange
+        render(<Provider store={store}>
+          <Fetch text="Hello world!" />
+        </Provider>);
 
-      // act
-      fireEvent.click(screen.getByText('Click me'))
+        // act
+        fireEvent.click(screen.getByText('Click me'));
 
-      // assert
-      expect(screen.getByRole('heading'))
-        .toHaveTextContent('Hello world!');
+        // assert
+        await waitFor(() => {
+          expect(screen.queryByRole('button'))
+            .toBeNull();
+        });
+      });
+
+      it("shows given text", async () => {
+        // arrange
+        render(<Provider store={store}>
+          <Fetch text="Hello world!" />
+        </Provider>);
+
+        // act
+        act(() => {
+          fireEvent.click(screen.getByText('Click me'));
+        });
+
+        // assert
+        await waitFor(() => {
+          expect(screen.getByRole('heading'))
+            .toHaveTextContent('Hello world!');
+
+        });
+      });
     });
   });
 });

@@ -1,58 +1,59 @@
-import '@testing-library/jest-dom'
-import useAuth, { AuthState } from '../../hooks/useAuth';
-import { render, screen } from '@testing-library/react';
-import UserGreeting from './UserGreeting';
+import { render, screen } from "@testing-library/react";
+import { useDispatch } from "react-redux";
+import UserGreeting from "./UserGreeting";
+import useAuth from "../../hooks/useAuth"; // Adjust path to the hook
+import { AppDispatch } from "../../redux/store"; // Import AppDispatch from store
 
-jest.mock('../../hooks/useAuth');
+jest.mock("../../hooks/useAuth");
+jest.mock("react-redux", () => ({
+  useDispatch: jest.fn(),
+}));
 
-describe("UserGreeting", () => {
-  it('displays loading message when auth state is fetching', () => {
-    const auth: AuthState = {
-      state: "fetching"
-    };
+describe("UserGreeting component", () => {
+  const mockDispatch = jest.fn() as unknown as AppDispatch;
 
-    (useAuth as jest.Mock).mockReturnValue({ auth });
-
-    render(<UserGreeting />);
-
-    expect(screen.queryByText('Loading user...'))
-      .toBeInTheDocument();
+  beforeEach(() => {
+    jest.clearAllMocks();
+    (useDispatch as any as jest.Mock).mockReturnValue(mockDispatch);
   });
 
-  it('welcomes guests', () => {
-    const auth: AuthState = {
-      state: "done",
-      auth: { type: "guest" }
-    };
-
-    (useAuth as jest.Mock).mockReturnValue({ auth });
+  test("displays 'Loading user...' when auth state is fetching", () => {
+    (useAuth as jest.Mock).mockReturnValue({ state: "fetching" });
 
     render(<UserGreeting />);
 
-    expect(screen.queryByText('Loading user...'))
-      .not.toBeInTheDocument();
-    expect(screen.queryByText('Hello, guest.'))
-      .toBeInTheDocument();
+    expect(screen.getByText("Loading user...")).toBeInTheDocument();
   });
 
-  it('welcomes users personally', () => {
-    const auth: AuthState = {
-      state: "done",
-      auth: {
-        type: "user",
-        id: 123,
-        name: "Henk Foo",
-        email: "henk.foo@example.example"
-      }
-    };
-
-    (useAuth as jest.Mock).mockReturnValue({ auth });
+  test("displays error message when auth state is error", () => {
+    (useAuth as jest.Mock).mockReturnValue({ state: "error" });
 
     render(<UserGreeting />);
 
-    expect(screen.queryByText('Loading user...'))
-      .not.toBeInTheDocument();
-    expect(screen.queryByText('Hello, Henk Foo (henk.foo@example.example)'))
-      .toBeInTheDocument();
+    expect(screen.getByText("Error: could not load user.")).toBeInTheDocument();
+  });
+
+  test("displays 'Hello, guest.' when auth state is done with guest user", () => {
+    (useAuth as jest.Mock).mockReturnValue({
+      state: "done",
+      auth: { type: "guest" },
+    });
+
+    render(<UserGreeting />);
+
+    expect(screen.getByText("Hello, guest.")).toBeInTheDocument();
+  });
+
+  test("displays user's name and email when auth state is done with user auth", () => {
+    (useAuth as jest.Mock).mockReturnValue({
+      state: "done",
+      auth: { type: "user", name: "Mr. Foo", email: "foo@example.org" },
+    });
+
+    render(<UserGreeting />);
+
+    expect(
+      screen.getByText("Hello, Mr. Foo (foo@example.org)")
+    ).toBeInTheDocument();
   });
 });

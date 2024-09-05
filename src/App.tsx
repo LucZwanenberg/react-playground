@@ -1,14 +1,13 @@
+import { Provider } from 'react-redux'
 import './App.css'
 import Fetch from './components/Fetch/Fetch'
-import { getUserFromApi } from './hooks/getUserFromApi'
-import { AuthProvider } from './hooks/useAuth'
+import store from './redux/store'
 
 function App() {
-
   return (
-    <AuthProvider getUser={getUserFromApi}>
+    <Provider store={store}>
       <Fetch text="Hello World!" />
-    </AuthProvider>
+    </Provider>
   )
 }
 
