@@ -1,19 +1,52 @@
-// import { render, screen } from '@testing-library/react'
-// import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
-// import Fetch from './Fetch'
+import { render, fireEvent, screen, within } from '@testing-library/react'
+import Fetch from './Fetch'
 
-test('loads and displays greeting', async () => {
-  // // given
-  // render(<Fetch url="/greeting" />)
 
-  // // when
-  // await userEvent.click(screen.getByText('Load Greeting'))
-  // await screen.findByRole('heading')
+describe("Fetch", () => {
+  describe("initial state", () => {
+    it("shows button", async () => {
+      // arrange
+      render(<Fetch text="Hello world!" />);
 
-  // // then
-  // expect(screen.getByRole('heading')).toHaveTextContent('hello there')
-  // expect(screen.getByRole('button')).toBeDisabled()
+      // assert
+      expect(screen.getByRole('button'))
+        .toHaveTextContent('Click me');
+    });
 
-  expect(1 + 1).toEqual(2);
-})
+    it("does not show text", async () => {
+      // arrange
+      render(<Fetch text="Hello world!" />);
+
+      // assert
+      expect(screen.getByRole('heading'))
+        .not.toHaveTextContent('Hello world!');
+    });
+  });
+
+  describe("when user clicks button", () => {
+    it("hides button", async () => {
+      // arrange
+      render(<Fetch text="Hello world!" />);
+
+      // act
+      fireEvent.click(screen.getByText('Click me'))
+
+      // assert
+      expect(screen.queryByRole('button'))
+        .toBeNull();
+    });
+
+    it("shows given text", async () => {
+      // arrange
+      render(<Fetch text="Hello world!" />);
+
+      // act
+      fireEvent.click(screen.getByText('Click me'))
+
+      // assert
+      expect(screen.getByRole('heading'))
+        .toHaveTextContent('Hello world!');
+    });
+  });
+});

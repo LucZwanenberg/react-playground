@@ -4,7 +4,7 @@ import Fetch from './components/Fetch/Fetch'
 function App() {
 
   return (
-    <Fetch url="/greeting" />
+    <Fetch text="Hello World!" />
   )
 }
 
