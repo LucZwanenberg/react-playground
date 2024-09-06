@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import ServiceContainer from '../../bootstrap/ServiceContainer';
-import { User } from '../../api/IAuthenticationApi';
+import { User } from '../../services/authentication/IAuthenticationApi';
 
 export const SET_AUTH_USER = 'SET_AUTH_USER';
 export const SET_GUEST = 'SET_GUEST';

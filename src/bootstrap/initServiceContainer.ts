@@ -1,21 +1,13 @@
-import FakeAuthenticationApi from "../api/FakeAuthenticationApi";
-import IHttpClient from "../api/IHttpClient";
+import AuthenticationApi from "../services/authentication/FooAuthenticationApi";
+import HttpClient from "../services/http/HttpClient";
 import ServiceContainer from "./ServiceContainer";
 
-class HttpClient implements IHttpClient {
-  fetch(url: string): Promise<string> {
-    return new Promise(resolve => {
-      fetch(url).then(response => resolve(`${response}`));
-    });
-  }
-}
-
 const initServiceContainer = (): ServiceContainer => ({
-  authenticationAPI: new FakeAuthenticationApi({
+  authenticationAPI: new AuthenticationApi({
     httpClient: new HttpClient(),
     protocol: 'https',
-    host: "www.example.org",
-    port: 8080
+    host: "mpaccf2a06bbb3ffdb31.free.beeceptor.com",
+    port: 443
   })
 });
 

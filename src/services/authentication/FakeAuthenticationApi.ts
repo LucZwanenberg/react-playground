@@ -1,5 +1,5 @@
 import IAuthenticationApi, { User } from './IAuthenticationApi';
-import IHttpClient from './IHttpClient';
+import IHttpClient from '../http/IHttpClient';
 
 interface FakeAPIConfig {
   httpClient: IHttpClient;
