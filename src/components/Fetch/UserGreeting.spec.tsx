@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { useDispatch } from "react-redux";
 import UserGreeting from "./UserGreeting";
 import useAuth from "../../hooks/useAuth"; // Adjust path to the hook
-import { AppDispatch } from "../../redux/store"; // Import AppDispatch from store
+import { AppDispatch } from "../../redux/defaultStore"; // Import AppDispatch from store
 
 jest.mock("../../hooks/useAuth");
 jest.mock("react-redux", () => ({

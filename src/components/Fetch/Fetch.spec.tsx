@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import { Provider } from "react-redux";
 import { render, fireEvent, screen, waitFor } from '@testing-library/react'
 import Fetch from './Fetch';
-import { store } from "../../redux/store";
+import { defaultStore } from "../../redux/defaultStore";
 import { act } from 'react';
 
 
@@ -10,7 +10,7 @@ describe("Fetch", () => {
   describe("initial state", () => {
     it("shows button", async () => {
       // arrange
-      render(<Provider store={store}>
+      render(<Provider store={defaultStore}>
         <Fetch text="Hello world!" />
       </Provider>);
 
@@ -22,7 +22,7 @@ describe("Fetch", () => {
 
     it("does not show text", async () => {
       // arrange
-      render(<Provider store={store}>
+      render(<Provider store={defaultStore}>
         <Fetch text="Hello world!" />
       </Provider>);
 
@@ -36,7 +36,7 @@ describe("Fetch", () => {
     describe("when user clicks button", () => {
       it("hides button", async () => {
         // arrange
-        render(<Provider store={store}>
+        render(<Provider store={defaultStore}>
           <Fetch text="Hello world!" />
         </Provider>);
 
@@ -52,7 +52,7 @@ describe("Fetch", () => {
 
       it("shows given text", async () => {
         // arrange
-        render(<Provider store={store}>
+        render(<Provider store={defaultStore}>
           <Fetch text="Hello world!" />
         </Provider>);
 

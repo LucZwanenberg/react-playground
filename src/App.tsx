@@ -1,11 +1,11 @@
 import { Provider } from 'react-redux'
 import './App.css'
 import Fetch from './components/Fetch/Fetch'
-import store from './redux/store'
+import defaultStore from './redux/defaultStore'
 
 function App() {
   return (
-    <Provider store={store}>
+    <Provider store={defaultStore}>
       <Fetch text="Hello World!" />
     </Provider>
   )
