@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import { Provider } from "react-redux";
 import { render, fireEvent, screen, waitFor } from '@testing-library/react'
-import Fetch from './HiddenText';
+import Fetch from '../HiddenText/HiddenText';
 import { act } from 'react';
 import createStore from '../../redux/createStore';
 import initServiceContainer from '../../bootstrap/initServiceContainer';

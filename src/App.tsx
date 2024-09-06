@@ -1,8 +1,8 @@
 import { Provider } from 'react-redux'
 import './App.css'
-import Fetch from './components/Fetch/HiddenText'
+import Fetch from './components/HiddenText/HiddenText'
 import defaultStore from './redux/defaultStore'
-import UserGreeting from './components/Fetch/UserGreeting'
+import UserGreeting from './components/UserGreeting/UserGreeting'
 
 function App() {
   return (
