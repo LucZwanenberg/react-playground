@@ -1,14 +1,14 @@
-// FakeAuthenticationAPI.ts
-
-import IAuthenticationAPI, { User } from './IAuthenticationAPI';
+import IAuthenticationApi, { User } from './IAuthenticationApi';
+import IHttpClient from './IHttpClient';
 
 interface FakeAPIConfig {
+  httpClient: IHttpClient;
   protocol: "http" | "https";
   host: string;
   port: number;
 }
 
-class FakeAuthenticationAPI implements IAuthenticationAPI {
+class FakeAuthenticationApi implements IAuthenticationApi {
   public constructor(_config: FakeAPIConfig) { }
 
   private readonly fakeUser: User = {
@@ -28,4 +28,4 @@ class FakeAuthenticationAPI implements IAuthenticationAPI {
   }
 }
 
-export default FakeAuthenticationAPI;
+export default FakeAuthenticationApi;

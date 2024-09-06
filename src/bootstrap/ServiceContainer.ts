@@ -1,5 +1,5 @@
-import IAuthenticationAPI from "../api/IAuthenticationAPI";
+import IAuthenticationApi from "../api/IAuthenticationApi";
 
 export default interface ServiceContainer {
-  authenticationAPI: IAuthenticationAPI;
+  authenticationAPI: IAuthenticationApi;
 }

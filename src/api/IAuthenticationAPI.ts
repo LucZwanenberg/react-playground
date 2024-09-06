@@ -4,6 +4,6 @@ export type User = {
   email: string;
 }
 
-export default interface IAuthenticationAPI {
+export default interface IAuthenticationApi {
   fetchCurrentUser(): Promise<User | null>;
 }
