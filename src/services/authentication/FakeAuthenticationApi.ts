@@ -19,7 +19,7 @@ class FakeAuthenticationApi implements IAuthenticationApi {
 
   async fetchCurrentUser(): Promise<User | null> {
     await this.simulateNetworkDelay();
-    const isAuthenticated = Math.random() > 0.5;
+    const isAuthenticated = Math.random() > 0.25;
     return isAuthenticated ? this.fakeUser : null;
   }
 

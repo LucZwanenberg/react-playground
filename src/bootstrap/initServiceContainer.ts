@@ -1,14 +1,15 @@
-import AuthenticationApi from "../services/authentication/FooAuthenticationApi";
+import FakeAuthenticationApi from "../services/authentication/FakeAuthenticationApi";
 import HttpClient from "../services/http/HttpClient";
 import ServiceContainer from "./ServiceContainer";
 
-const initServiceContainer = (): ServiceContainer => ({
-  authenticationAPI: new AuthenticationApi({
+const initServiceContainer = (overrides: Partial<ServiceContainer> = {}): ServiceContainer => ({
+  authenticationAPI: new FakeAuthenticationApi({
     httpClient: new HttpClient(),
     protocol: 'https',
-    host: "mpaccf2a06bbb3ffdb31.free.beeceptor.com",
+    host: "localhost",
     port: 443
-  })
+  }),
+  ...overrides
 });
 
 export default initServiceContainer;

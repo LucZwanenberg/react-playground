@@ -2,15 +2,24 @@ import '@testing-library/jest-dom'
 import { Provider } from "react-redux";
 import { render, fireEvent, screen, waitFor } from '@testing-library/react'
 import Fetch from './Fetch';
-import { defaultStore } from "../../redux/defaultStore";
 import { act } from 'react';
+import createStore from '../../redux/createStore';
+import initServiceContainer from '../../bootstrap/initServiceContainer';
+import AuthenticationApiMock from '../../mocks/AuthenticationApiMock';
 
+export const store = createStore(
+  initServiceContainer({
+    authenticationAPI: new AuthenticationApiMock(
+      () => new Promise(resolve => resolve(null))
+    )
+  })
+);
 
 describe("Fetch", () => {
   describe("initial state", () => {
     it("shows button", async () => {
       // arrange
-      render(<Provider store={defaultStore}>
+      render(<Provider store={store}>
         <Fetch text="Hello world!" />
       </Provider>);
 
@@ -22,7 +31,7 @@ describe("Fetch", () => {
 
     it("does not show text", async () => {
       // arrange
-      render(<Provider store={defaultStore}>
+      render(<Provider store={store}>
         <Fetch text="Hello world!" />
       </Provider>);
 
@@ -36,7 +45,7 @@ describe("Fetch", () => {
     describe("when user clicks button", () => {
       it("hides button", async () => {
         // arrange
-        render(<Provider store={defaultStore}>
+        render(<Provider store={store}>
           <Fetch text="Hello world!" />
         </Provider>);
 
@@ -52,7 +61,7 @@ describe("Fetch", () => {
 
       it("shows given text", async () => {
         // arrange
-        render(<Provider store={defaultStore}>
+        render(<Provider store={store}>
           <Fetch text="Hello world!" />
         </Provider>);
 

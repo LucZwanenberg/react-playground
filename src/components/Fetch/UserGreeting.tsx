@@ -1,13 +1,28 @@
-import useAuth from "../../hooks/useAuth";
+import React from 'react';
+import useAuth from '../../hooks/useAuth';
 
-export default function UserGreeting() {
+const UserGreeting: React.FC = () => {
   const auth = useAuth();
 
-  return (
-    <div style={{ paddingBottom: "2em" }}>
-      {auth.type == "loading" && "Loading..."}
-      {auth.type == "guest" && "Hello, guest."}
-      {auth.type == "user" && `${auth.user.name} (${auth.user.email})`}
-    </div>
-  )
+  return <UserGreetingView auth={auth} />;
+};
+
+interface UserGreetingViewProps {
+  auth: {
+    type: 'loading' | 'guest' | 'user';
+    user?: { name: string; email: string };
+  };
 }
+
+const UserGreetingView: React.FC<UserGreetingViewProps> = ({ auth }) => {
+  return (
+    <div style={{ paddingBottom: '2em' }}>
+      {auth.type === 'loading' && 'Loading...'}
+      {auth.type === 'guest' && 'Hello, guest.'}
+      {auth.type === 'user' && `${auth.user?.name} (${auth.user?.email})`}
+    </div>
+  );
+};
+
+export default UserGreeting;
+export { UserGreetingView };
