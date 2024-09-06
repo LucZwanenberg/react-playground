@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import { Provider } from "react-redux";
 import { render, fireEvent, screen, waitFor } from '@testing-library/react'
-import Fetch from './Fetch';
+import Fetch from './HiddenText';
 import { act } from 'react';
 import createStore from '../../redux/createStore';
 import initServiceContainer from '../../bootstrap/initServiceContainer';
@@ -15,7 +15,7 @@ export const store = createStore(
   })
 );
 
-describe("Fetch", () => {
+describe("HiddenText", () => {
   describe("initial state", () => {
     it("shows button", async () => {
       // arrange

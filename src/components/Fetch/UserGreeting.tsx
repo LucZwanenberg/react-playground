@@ -24,5 +24,5 @@ const UserGreetingView: React.FC<UserGreetingViewProps> = ({ auth }) => {
   );
 };
 
-export default UserGreeting;
 export { UserGreetingView };
+export default UserGreeting;
