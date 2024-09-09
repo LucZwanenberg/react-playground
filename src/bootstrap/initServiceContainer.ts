@@ -1,13 +1,11 @@
-import FakeAuthenticationApi from "../services/authentication/FakeAuthenticationApi";
+import LocalMockAuthenticationApi from "../services/authentication/LocalMockAuthenticationApi";
 import HttpClient from "../services/http/HttpClient";
 import ServiceContainer from "./ServiceContainer";
 
 const initServiceContainer = (overrides: Partial<ServiceContainer> = {}): ServiceContainer => ({
-  authenticationAPI: new FakeAuthenticationApi({
+  authenticationAPI: new LocalMockAuthenticationApi({
     httpClient: new HttpClient(),
-    protocol: 'https',
-    host: "localhost",
-    port: 443
+    port: 3000
   }),
   ...overrides
 });
