@@ -1,3 +1,7 @@
+To do
+- [x] Use Service Container pattern in combination with Redux Thunk
+- [ ] Learn Playwright API
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
