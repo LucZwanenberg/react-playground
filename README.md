@@ -48,3 +48,7 @@ export default tseslint.config({
   },
 })
 ```
+
+## Commands
+- `yarn test` run unit tests in ./src using Jest
+- `yarn playwright` run browser tests in .tests using Playwright

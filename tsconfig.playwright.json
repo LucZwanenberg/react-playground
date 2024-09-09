@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.json", // If you have a base config
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "strict": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "types": [
+      "node",
+      "@playwright/test"
+    ], // Add Playwright and Node.js types
+    "skipLibCheck": true // Optional: Skip type checking of libraries for faster builds
+  },
+  "include": [
+    "tests/**/*.ts"
+  ] // Include your test directory
+}
