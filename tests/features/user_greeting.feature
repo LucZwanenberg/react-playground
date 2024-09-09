@@ -4,6 +4,11 @@ Feature: Displaying the user greeting
   I want to see the currently logged-in account
   So I know my changes are recorded to correct account
 
+  Scenario: Displaying the greeting for guest user
+    Given the authentication service returns null
+    When I navigate to the application home page
+    Then the application should show "Hello, guest."
+
   Scenario: Displaying the greeting for the authenticated user
     Given the authentication service returns the following user:
       | first_name | last_name  | email                        |

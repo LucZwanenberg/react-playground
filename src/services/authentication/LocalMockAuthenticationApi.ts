@@ -15,7 +15,9 @@ class LocalMockAuthenticationApi implements IAuthenticationApi {
       .httpClient
       .get(`http://localhost:${this._config.port}/authentication/user`);
 
-    return UserSchema.parse(response.data);
+    return response.data === null
+      ? null
+      : UserSchema.parse(response.data);
   }
 }
 
