@@ -52,7 +52,7 @@ describe("UserGreeting", () => {
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
-  it('should welcome guest when API returns null', async () => {
+  it('should greet guest when API returns null', async () => {
     // arrange
     const store = createStore({
       authenticationAPI: new Promise((resolve) => resolve(null))
@@ -91,7 +91,7 @@ describe("UserGreeting", () => {
 
     // assert
     await waitFor(() => {
-      expect(screen.queryByText('Foo Barssen (foo.barssen@example.org)'))
+      expect(screen.queryByText('Hello, Foo Barssen (foo.barssen@example.org)'))
         .toBeInTheDocument()
     });
   });
