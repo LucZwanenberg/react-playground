@@ -1,18 +1,18 @@
 {
-  "extends": "./tsconfig.json", // If you have a base config
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "CommonJS",
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "strict": true,
     "esModuleInterop": true,
-    "moduleResolution": "node",
-    "types": [
-      "node",
-      "@playwright/test"
-    ], // Add Playwright and Node.js types
-    "skipLibCheck": true // Optional: Skip type checking of libraries for faster builds
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist"
   },
   "include": [
     "tests/**/*.ts"
-  ] // Include your test directory
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
