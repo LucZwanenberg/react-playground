@@ -43,6 +43,6 @@ describe('UserGreetingView', () => {
     render(<UserGreetingView auth={auth} />);
 
     // assert
-    expect(screen.getByText('John Doe (john.doe@example.com)')).toBeInTheDocument();
+    expect(screen.getByText('Hello, John Doe (john.doe@example.com)')).toBeInTheDocument();
   });
 });

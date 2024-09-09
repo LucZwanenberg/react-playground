@@ -19,7 +19,7 @@ const UserGreetingView: React.FC<UserGreetingViewProps> = ({ auth }) => {
     <div style={{ paddingBottom: '2em' }}>
       {auth.type === 'loading' && 'Loading...'}
       {auth.type === 'guest' && 'Hello, guest.'}
-      {auth.type === 'user' && `${auth.user?.name} (${auth.user?.email})`}
+      {auth.type === 'user' && `Hello, ${auth.user?.name} (${auth.user?.email})`}
     </div>
   );
 };
